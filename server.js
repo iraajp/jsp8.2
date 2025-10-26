@@ -2,43 +2,23 @@ const express = require('express');
 const app = express();
 const port = 3004;
 
-app.get('/', (req, res) => {
-  const clock = new Date();
-  const hour = clock.getHours();
-  
+app.use(express.static(__dirname));
+
+app.get('/api/greeting', (req, res) => {
+  const hour = new Date().getHours();
   let greeting;
+  
   if (hour < 12) {
-    greeting = '<h1>Good morning!</h1>';
+    greeting = 'Good morning!';
   } else if (hour < 18) {
-    greeting = '<h1>Good afternoon!</h1>';
+    greeting = 'Good afternoon!';
   } else {
-    greeting = '<h1>Good evening!</h1>';
+    greeting = 'Good evening!';
   }
   
-  res.send(`
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <title>Practical 8.2: greetings.jsp</title>
-  <style>
-    body {
-      font-family: system-ui, -apple-system, Arial, sans-serif;
-      padding: 20px;
-      background-color: white;
-    }
-  </style>
-</head>
-<body bgcolor="white">
-  <h2>Practical 8.2: Time-based Greetings</h2>
-  ${greeting}
-  <p>Welcome to our site, open 24 hours a day.</p>
-  <p><small>Current time: ${clock.toLocaleTimeString()}</small></p>
-</body>
-</html>
-  `);
+  res.json({ message: greeting, time: new Date().toLocaleTimeString() });
 });
 
 app.listen(port, () => {
-  console.log(`Practical 8.2 (greetings) running at http://localhost:${port}/`);
+  console.log('Server running on http://localhost:' + port);
 });
