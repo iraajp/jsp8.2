@@ -1,0 +1,13 @@
+{
+  "name": "practical-8.2-greetings",
+  "version": "1.0.0",
+  "description": "Practical 8.2: JSP greetings.jsp - Time-based Greeting",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
